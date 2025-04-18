@@ -6,14 +6,13 @@ var ErrorMsg = document.querySelector("#ErrorMsg");
 var togglePass = document.querySelector("#togglePass");
 var passInput = document.querySelector("#signinpass");
 
-// ^app variables
-var dataList = [];
-dataList = JSON.parse(localStorage.getItem("userdata"));
-// &Functions
+// ^App variables
+var dataList = JSON.parse(localStorage.getItem("userdata")) || [];
 
+// &Functions
 function Login() {
-  if (signinEmail.value == "" || signinpass.value == "") {
-    ErrorMsg.innerHTML = `<p>All inputs is required</p>`;
+  if (signinEmail.value === "" || signinpass.value === "") {
+    ErrorMsg.innerHTML = `<p style="color:red; font-weight:bold;">All inputs are required</p>`;
   } else {
     checkUser();
   }
@@ -27,7 +26,13 @@ function checkUser() {
     ) {
       var userWelcomeName = dataList[i].name;
       localStorage.setItem("username", userWelcomeName);
-      location.href = `../home.html`;
+
+      // ✅ GitHub Pages + Local support
+      if (location.hostname === "mahmoudosman2611.github.io") {
+        location.href = "/Login-system/home.html";
+      } else {
+        location.href = "../home.html";
+      }
       return;
     }
   }
@@ -40,21 +45,15 @@ function checkUser() {
   });
 }
 
-// &Event
+// &Events
 login.addEventListener("click", Login);
 
 togglePass.addEventListener("click", function () {
   if (passInput.type === "password") {
     passInput.type = "text";
-    togglePass.classList.remove("fa-eye");
-    togglePass.classList.add("fa-eye-slash");
+    togglePass.classList.replace("fa-eye", "fa-eye-slash");
   } else {
     passInput.type = "password";
-    togglePass.classList.remove("fa-eye-slash");
-    togglePass.classList.add("fa-eye");
+    togglePass.classList.replace("fa-eye-slash", "fa-eye");
   }
 });
-
-
-
-

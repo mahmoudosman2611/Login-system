@@ -6,17 +6,18 @@ var ErrorMsg = document.querySelector("#ErrorMsg");
 var signUp = document.querySelector("#signUp");
 var togglePass = document.querySelector("#togglePass");
 
+// *Regex
 var userNameRegex = /^[A-Z][a-z]{3,}$/;
 var userEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 var userPassRegex = /^[a-zA-Z0-9@$!%*?&]{6,}$/;
 
-// ^app variables
+// ^App variables
 var dataList = JSON.parse(localStorage.getItem("userdata")) || [];
-// &Functions
 
+// &Functions
 function add() {
   if (userName.value == "" || userEmail.value == "" || userPass.value == "") {
-    ErrorMsg.innerHTML = `<p>All inputs is required</p>`;
+    ErrorMsg.innerHTML = `<p style="color:red; font-weight:bold;">All inputs are required</p>`;
   } else {
     if (
       validate(userNameRegex, userName) &&
@@ -30,9 +31,9 @@ function add() {
       };
 
       var isExist = dataList.some(function (user) {
-        return user.email === userEmail.value;
+        return user.email.toLowerCase() === userEmail.value.toLowerCase();
       });
-      
+
       if (isExist) {
         Swal.fire({
           icon: "warning",
@@ -42,10 +43,17 @@ function add() {
         });
         return;
       }
-      
+
       dataList.push(userData);
-      location.href = `../index.html`;
       localStorage.setItem("userdata", JSON.stringify(dataList));
+
+      // ✅ GitHub Pages + Local support
+      if (location.hostname === "mahmoudosman2611.github.io") {
+        location.href = "/Login-system/index.html";
+      } else {
+        location.href = "../index.html";
+      }
+
     } else {
       Swal.fire({
         icon: "error",
@@ -72,8 +80,7 @@ function validate(regex, element) {
   }
 }
 
-// &Event
-
+// &Events
 signUp.addEventListener("click", add);
 
 togglePass.addEventListener("click", function () {
