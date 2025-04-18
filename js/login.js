@@ -27,11 +27,10 @@ function checkUser() {
       var userWelcomeName = dataList[i].name;
       localStorage.setItem("username", userWelcomeName);
 
-      // ✅ GitHub Pages + Local support
       if (location.hostname === "mahmoudosman2611.github.io") {
         location.href = "/Login-system/home.html";
       } else {
-        location.href = "../home.html";
+        location.href = "home.html";
       }
       return;
     }
@@ -44,6 +43,7 @@ function checkUser() {
     confirmButtonColor: "#d33",
   });
 }
+
 
 // &Events
 login.addEventListener("click", Login);

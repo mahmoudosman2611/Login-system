@@ -51,7 +51,7 @@ function add() {
       if (location.hostname === "mahmoudosman2611.github.io") {
         location.href = "/Login-system/index.html";
       } else {
-        location.href = "../index.html";
+        location.href = "index.html";
       }
 
     } else {

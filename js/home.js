@@ -9,6 +9,6 @@ btnLogOut.addEventListener("click", function () {
   if (location.hostname === "mahmoudosman2611.github.io") {
     window.location.href = "/Login-system/index.html";
   } else {
-    window.location.href = "../index.html";
+    window.location.href = "index.html";
   }
 });
