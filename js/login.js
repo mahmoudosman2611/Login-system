@@ -25,13 +25,21 @@ function checkUser() {
       signinpass.value === dataList[i].password
     ) {
       var userWelcomeName = dataList[i].name;
-      localStorage.setItem("username", userWelcomeName);
+
+      var remember = document.querySelector("#rememberMe").checked;
+
+      if (remember) {
+        localStorage.setItem("username", userWelcomeName);
+      } else {
+        sessionStorage.setItem("username", userWelcomeName);
+      }
 
       if (location.hostname === "mahmoudosman2611.github.io") {
         location.href = "/Login-system/home.html";
       } else {
         location.href = "home.html";
       }
+
       return;
     }
   }
@@ -43,6 +51,7 @@ function checkUser() {
     confirmButtonColor: "#d33",
   });
 }
+
 
 
 // &Events

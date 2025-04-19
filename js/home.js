@@ -1,7 +1,9 @@
 var welcome = document.querySelector("#welcome");
 var btnLogOut = document.querySelector("#btnLogOut");
 
-welcome.innerHTML = localStorage.getItem("username");
+var username = localStorage.getItem("username") || sessionStorage.getItem("username");
+welcome.innerHTML = username;
+
 
 btnLogOut.addEventListener("click", function () {
   localStorage.removeItem("username");
